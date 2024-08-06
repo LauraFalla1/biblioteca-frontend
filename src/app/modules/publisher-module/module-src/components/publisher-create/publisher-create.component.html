@@ -1,0 +1,45 @@
+<button tuiIconButton shape="rounded" class="flat-button" icon="tuiIconPlus" (click)="
+		publisherService.clearForm();
+		publisherService.isOpenDialog = true;
+		publisherService.isCreateDialog = true
+	"></button>
+
+<ng-template let-observer [tuiDialogOptions]="{
+		label: 'Diálogo de la editorial',
+		size: 's'
+	}" [(tuiDialog)]="publisherService.isOpenDialog">
+	<form [formGroup]="form">
+		<div class="tui-form__row">
+			<tui-input formControlName="name">
+				Nombre
+				<input tuiTextfield />
+			</tui-input>
+		</div>
+
+		<div class="tui-form__row">
+			<tui-input formControlName="address">
+				Dirección
+				<input tuiTextfield />
+			</tui-input>
+		</div>
+
+		<div class="tui-form__row">
+			<tui-input-phone countryCode="+57" formControlName="phoneNumber">
+				Número de teléfono
+				<input tuiTextfield autocomplete="tel" /></tui-input-phone>
+		</div>
+
+		<div class="tui-form__row">
+			<tui-input formControlName="email">
+				Email
+				<input tuiTextfield type="email" /></tui-input>
+		</div>
+
+		<div class="tui-form__buttons tui-form__buttons_align_end">
+			<button tuiButton icon="tuiIconSave" (click)="publisherService.isCreateDialog ? create() : update()"
+				[disabled]="form.invalid">
+				{{ publisherService.isCreateDialog ? 'Crear' : 'Editar' }}
+			</button>
+		</div>
+	</form>
+</ng-template>

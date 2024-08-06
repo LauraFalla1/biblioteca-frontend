@@ -1,0 +1,36 @@
+<div class="left-group">
+	<button tuiButton appearance="mono" size="m" [routerLink]="['/administrator']" routerLinkActive="router-link-active"
+		*ngIf="sessionService.isLoggedIn && sessionService.role === Role.ADMIN">
+		Administración
+	</button>
+	<button tuiButton appearance="mono" size="m" [routerLink]="['/manager']" routerLinkActive="router-link-active"
+		*ngIf="sessionService.isLoggedIn && sessionService.role !== Role.USER">
+		Gestión
+	</button>
+	<button tuiButton appearance="mono" size="m" [routerLink]="['/dashboard']" routerLinkActive="router-link-active"
+		*ngIf="sessionService.isLoggedIn && sessionService.role === Role.USER">
+		Perfil
+	</button>
+	<button tuiButton appearance="mono" size="m" [routerLink]="['/books']" routerLinkActive="router-link-active"
+		*ngIf="sessionService.isLoggedIn">
+		Libros
+	</button>
+	<!-- <button
+		tuiButton
+		appearance="mono"
+		size="m"
+		[routerLink]="['/help']"
+		routerLinkActive="router-link-active"
+		*ngIf="sessionService.isLoggedIn"
+	>
+		Ayuda
+	</button> -->
+</div>
+<div class="right-group">
+	<button tuiButton appearance="whiteblock-active" size="m" (click)="sessionService.logout()"
+		*ngIf="sessionService.isLoggedIn">
+		Salir
+	</button>
+	<button tuiIconButton icon="tuiIconMoonLarge" shape="rounded" appearance="mono"
+		(click)="themeService.changeDark()"></button>
+</div>

@@ -1,0 +1,202 @@
+<div class="container tui-container_adaptive">
+	<div class="tui-row">
+		<div class="tui-col-offset_1 tui-col_3 left-group__col">
+			<tui-island textAlign="center" class="left-group__island">
+				<div class="left-group__wrapper tui-island__content">
+					<div class="left-group__content">
+						<div class="div">
+							<figure class="tui-island__figure">
+								<tui-avatar new avatarUrl="tuiIconUser" size="xxl"></tui-avatar>
+							</figure>
+							<h3 class="tui-island__title">Administrador</h3>
+							<p class="left-group__paragraph tui-island__paragraph"></p>
+						</div>
+						<!-- <div class="left-group__spacer"></div> -->
+						<button tuiButton type="button" size="m" (click)="isOpenPassAdminDialog = true"
+							class="left-group__footer-button tui-island__footer-button">
+							Editar
+						</button>
+					</div>
+				</div>
+			</tui-island>
+		</div>
+
+		<div class="tui-col_7 right-group__col">
+			<div class="library tui-text_body-l">
+				<form #form="ngForm">
+					<div class="tui-form__row">
+						<h3 class="clearfix tui-form__header">
+							Configuraciones de la biblioteca
+							<button tuiButton class="float__end" icon="tuiIconSaveLarge" size="m">
+								Guardar
+							</button>
+						</h3>
+					</div>
+					<div class="tui-form__row">
+						<tui-input tuiAutoFocus [(ngModel)]="name" name="example1">
+							<input tuiTextfield />
+							Nombre de la biblioteca
+						</tui-input>
+					</div>
+					<div class="tui-form__row">
+						<tui-input tuiAutoFocus [(ngModel)]="email" name="example22">
+							<input tuiTextfield type="email" />
+							Email
+						</tui-input>
+					</div>
+					<div class="tui-form__row">
+						<tui-input tuiAutoFocus [(ngModel)]="address" name="example23">
+							<input tuiTextfield />
+							Dirección
+						</tui-input>
+					</div>
+					<div class="tui-form__row">
+						<tui-input-phone countryCode="+57" [formControl]="phone">
+							<input tuiTextfield />
+							Teléfono
+						</tui-input-phone>
+					</div>
+					<div class="tui-form__row">
+						<tui-input tuiAutoFocus [(ngModel)]="workDate" name="example24">
+							<input tuiTextfield />
+							Horario de trabajo
+						</tui-input>
+					</div>
+
+					<div class="tui-form__row">
+						<tui-input-number [formControl]="days" [tuiTextfieldPostfix]="'COP' | tuiCurrency">
+							Monto de la multa por no devolución
+						</tui-input-number>
+					</div>
+
+					<div class="tui-form__row">
+						<tui-input-number [formControl]="cost">
+							Días antes de la multa por no devolver el libro a tiempo
+						</tui-input-number>
+					</div>
+				</form>
+			</div>
+			<div class="tabs">
+				<tui-scrollbar waIntersectionRoot class="content" [hidden]="true">
+					<table tuiTable class="table" [columns]="columns">
+						<thead tuiThead>
+							<tr tuiThGroup>
+								<th tuiTh *tuiHead="'id'">№</th>
+								<th tuiTh *tuiHead="'username'" [sticky]="true">Nombre de usuario</th>
+								<th tuiTh *tuiHead="'createDate'">Fecha de adición del empleado</th>
+								<th tuiTh *tuiHead="'actions'" [sorter]="null">
+									<button tuiButton size="s" appearance="primary" icon="tuiIconUserPlus"
+										(click)="isOpenAddEmpDialog = true">
+										Añadir
+									</button>
+								</th>
+							</tr>
+						</thead>
+						<tbody tuiTbody [data]="data">
+							<tr *ngFor="let element of data; let i = index" tuiTr
+								[class.tr_changed]="isChangeItem(element)">
+								<td *tuiCell="'id'" tuiTd>
+									{{ element.id != undefined ? i + 1 : '' }}
+								</td>
+
+								<td *tuiCell="'username'" tuiTd>
+									<tui-text-area class="textarea" [expandable]="true" [(ngModel)]="element.username"
+										(ngModelChange)="onValueChange(element)"></tui-text-area>
+								</td>
+
+								<td *tuiCell="'createDate'" tuiTd>
+									<tui-input-date toNativeDate class="textarea" [(ngModel)]="element.createDate"
+										(ngModelChange)="onValueChange(element)"></tui-input-date>
+								</td>
+
+								<td *tuiCell="'actions'" tuiTd class="actions">
+									<tui-hosted-dropdown [content]="actionsContent" *ngIf="element.id !== undefined">
+										<button tuiIconButton size="s" appearance="accent"
+											icon="tuiIconMoreVertical"></button>
+									</tui-hosted-dropdown>
+									<ng-template #actionsContent>
+										<tui-data-list role="menu">
+											<tui-opt-group>
+												<button tuiOption (click)="update(element)">
+													Guardar
+													<tui-svg src="tuiIconSave"></tui-svg>
+												</button>
+												<button tuiOption (click)="delete(element)">
+													Eliminar
+													<tui-svg src="tuiIconTrash2"></tui-svg>
+												</button>
+											</tui-opt-group>
+											<tui-opt-group>
+												<button tuiOption (click)="isOpenPassDialog = true">
+													Cambiar contraseña
+													<tui-svg src="tuiIconLock"></tui-svg>
+												</button>
+											</tui-opt-group>
+										</tui-data-list>
+									</ng-template>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</tui-scrollbar>
+			</div>
+		</div>
+	</div>
+</div>
+
+<ng-template let-observer [tuiDialogOptions]="{
+		label: 'Añadir nuevo empleado',
+		size: 's'
+	}" [(tuiDialog)]="isOpenAddEmpDialog">
+	<form>
+		<div class="tui-form__row">
+			<tui-input tuiAutoFocus [(ngModel)]="username" name="example2">
+				<input tuiTextfield />
+				Nombre de usuario
+			</tui-input>
+		</div>
+
+		<div class="tui-form__row">
+			<tui-input-password tuiAutoFocus [(ngModel)]="password" name="example1">
+				Contraseña
+				<input tuiTextfield />
+			</tui-input-password>
+		</div>
+
+		<div class="tui-form__buttons tui-form__buttons_align_end">
+			<button tuiButton (click)="addEmp()">Añadir empleado</button>
+		</div>
+	</form>
+</ng-template>
+
+<ng-template let-observer [tuiDialogOptions]="{
+		label: 'Cambiar contraseña del empleado',
+		size: 's'
+	}" [(tuiDialog)]="isOpenPassDialog">
+	<form>
+		<div class="tui-form__row">
+			<tui-input-password tuiAutoFocus name="example1"> Nueva contraseña </tui-input-password>
+		</div>
+
+		<div class="tui-form__buttons tui-form__buttons_align_end">
+			<button tuiButton type="submit" (click)="isOpenPassDialog = false">Cambiar contraseña</button>
+		</div>
+	</form>
+</ng-template>
+
+<ng-template let-observer [tuiDialogOptions]="{
+		label: 'Cambiar contraseña del administrador',
+		size: 's'
+	}" [(tuiDialog)]="isOpenPassAdminDialog">
+	<form>
+		<div class="tui-form__row">
+			<tui-input-password tuiAutoFocus name="example1"> Nueva contraseña </tui-input-password>
+		</div>
+
+		<div class="tui-form__buttons tui-form__buttons_align_end">
+			<button tuiButton type="submit" (click)="isOpenPassAdminDialog = false">
+				Cambiar contraseña
+			</button>
+		</div>
+	</form>
+</ng-template>

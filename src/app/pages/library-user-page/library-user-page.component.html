@@ -1,0 +1,57 @@
+<div class="container tui-container_adaptive">
+  <div class="tui-row">
+    <div class="tui-col-offset_1 tui-col_3 left-group__col">
+      <tui-island textAlign="center" class="left-group__island">
+        <div class="left-group__wrapper tui-island__content">
+          <div class="left-group__content">
+            <div class="div">
+              <figure class="tui-island__figure">
+                <tui-avatar new [text]="userForm?.lastName + ' ' + userForm?.firstName + ' ' + userForm?.middleName"
+                  size="xxl" [rounded]="true" [autoColor]="true"></tui-avatar>
+              </figure>
+              <h3 class="tui-island__title">{{userForm?.lastName + " " + userForm?.firstName + " " +
+                userForm?.middleName}}</h3>
+              <p class="left-group__paragraph tui-island__paragraph">
+                <strong>Email: </strong>{{userForm?.email}}<br>
+                <strong>Teléfono :</strong>{{userForm?.phoneNumber||''}}<br>
+                <strong>Género: </strong>{{userForm?.genderType==GenderType.MALE?'Masculino':'Femenino'}}<br>
+                <strong>Fecha de nacimiento: </strong>{{userForm?.birthday}}<br>
+              </p>
+            </div>
+            <!-- <div class="left-group__spacer"></div> -->
+            <button tuiButton type="button" size="m" class="left-group__footer-button tui-island__footer-button">
+              Editar
+            </button>
+          </div>
+        </div>
+      </tui-island>
+      <div class="cost-block">
+        <h3 class="tui-text_h6">
+          Deuda: <span class="tui-text_body-m cost-block__end">{{userForm?.debt}} {{ 'COP' | tuiCurrency }}</span>
+        </h3>
+      </div>
+    </div>
+
+    <div class="tui-col_7 right-group__col">
+      <div class="library tui-text_body-l">
+        <p>
+          <strong>Biblioteca</strong>: Biblioteca Municipal Estatal<br />
+          <strong>Email</strong>: Bibliotecagmail.com<br />
+          <strong>Dirección</strong>: LauraB<br />
+          <strong>Horario de trabajo</strong>: 13:00 - 22:00 todos los días<br />
+        </p>
+      </div>
+      <div class="tabs">
+        <tui-tabs [(activeItemIndex)]="activeItemIndex">
+          <button tuiTab tuiRipple="var(--tui-text-01)" (click)="setHandsTab()">
+            Libros en préstamo
+          </button>
+          <button tuiTab tuiRipple="var(--tui-text-01)" (click)="setHistoryTab()">Historial</button>
+        </tui-tabs>
+        <div class="content-tab">
+          <app-book-lending-list [userForm]="userForm"></app-book-lending-list>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

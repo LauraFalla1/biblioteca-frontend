@@ -1,0 +1,10 @@
+@import "@taiga-ui/core/styles/taiga-ui-local.scss";
+
+
+html, body{
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  background-color: var(--tui-base-01);
+ }

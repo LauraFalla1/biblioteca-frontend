@@ -1,0 +1,24 @@
+@import '@taiga-ui/core/styles/taiga-ui-local.scss';
+
+:host {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1.25rem;
+  background: var(--tui-base-01);
+  border-bottom: 1px solid var(--tui-base-03);
+
+  @include shadow(1);
+
+}
+
+.left-group,.right-group{
+  display: flex;
+  align-items: center;
+  // gap: 1rem;
+  justify-content: space-between;
+}
+
+.router-link-active{
+  border: 2px solid var(--tui-secondary);
+}

@@ -1,0 +1,8 @@
+<tui-badged-content [contentTop]="0" [colorTop]="bookService.search.trim() !== '' ? 'var(--tui-error-fill)' : ''"
+  class="input">
+  <tui-input [(ngModel)]="search">
+    Búsqueda por nombre o identificador
+  </tui-input>
+</tui-badged-content>
+
+<button tuiButton (click)="runSearch()">Buscar</button>

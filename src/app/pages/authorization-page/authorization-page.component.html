@@ -1,0 +1,38 @@
+<div class="tui-container tui-container_adaptive">
+	<div class="tui-row tui-row_align_center tui-row_adaptive content">
+		<div class="tui-col_6 tui-col-offset_3">
+			<tui-island class="island">
+				<form class="tui-form" [formGroup]="form">
+					<h3 class="tui-form__header tui-island_text-align_center">Ingreso</h3>
+					<div class="tui-form__row">
+						<tui-input formControlName="username" class="tui-space_bottom-3" #username>
+							Nombre de usuario
+							<input tuiTextfield type="text" (keyup.enter)="toFocus(password)" />
+						</tui-input>
+						<tui-error formControlName="username" [error]="[] | tuiFieldError | async"></tui-error>
+					</div>
+					<div class="tui-form__row">
+						<tui-input-password formControlName="password" tuiTextfieldSize="s" (keyup.enter)="sinIn()"
+							#password>
+							Contraseña
+							<input tuiTextfield />
+						</tui-input-password>
+						<tui-error formControlName="password" [error]="[] | tuiFieldError | async"></tui-error>
+					</div>
+					<div class="tui-form__buttons">
+						<button tuiButton type="button" class="tui-form__button" class="username" (click)="sinIn()">
+							Ingresar
+						</button>
+					</div>
+					<tui-error class="tui-island_text-align_center" formControlName="password"
+						[error]="computedAuthError"></tui-error>
+
+					<p class="tui-island_text-align_center">
+						¿No tienes una cuenta?
+						<a tuiLink [routerLink]="['/sign-up']" routerLinkActive="router-link-active">Regístrate</a>
+					</p>
+				</form>
+			</tui-island>
+		</div>
+	</div>
+</div>

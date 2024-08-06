@@ -1,0 +1,61 @@
+@import "@taiga-ui/core/styles/taiga-ui-local.scss";
+
+$side-width: 15rem;
+
+:host {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  max-width: 100%;
+  position: relative;
+}
+
+.side {
+  min-width: $side-width;
+  width: $side-width;
+  border-right: 1px solid var(--tui-base-03);
+  position: relative;
+}
+
+.side__link {
+  // margin-bottom: 2rem !important;
+  width: 100%;
+}
+
+.side__btn {
+  // margin-right: 2rem !important;
+  margin-top: 2rem;
+}
+
+.content {
+  background-color: var(--tui-base-02);
+  width: calc(100% - $side-width);
+  max-width: calc(100% - $side-width);
+  position: relative;
+
+}
+
+.publishers-list-tab {
+  width: 100%;
+  max-width: 100%;
+  position: relative;
+
+}
+
+
+
+.tools-block {
+  margin: 1em;
+}
+
+.accordion{
+}
+
+.accordion__item {
+  // width: 100%;
+  // min-width: 100%;
+
+  // button {
+  //   color: red !important;
+  // }
+}

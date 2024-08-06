@@ -1,0 +1,54 @@
+<tui-scrollbar waIntersectionRoot class="content" [hidden]="true">
+
+  <table tuiTable class="table" [columns]="columns">
+    <thead class="">
+      <tr tuiThGroup>
+        <th tuiTh *tuiHead="'id'">№</th>
+        <th tuiTh *tuiHead="'indexBook'">Identificador del libro</th>
+        <th tuiTh *tuiHead="'bookName'">Libro</th>
+        <th tuiTh *tuiHead="'indexUserForm'">Identificador del suscriptor</th>
+        <th tuiTh *tuiHead="'userFormName'">Suscriptor</th>
+        <th tuiTh *tuiHead="'cost'">Precio</th>
+        <th tuiTh *tuiHead="'date'">Fecha de pago</th>
+      </tr>
+    </thead>
+    <tbody tuiTbody [data]="data">
+      <tr *ngFor="let item of data | search:paymentService.search| searchByFIO:paymentService.searchFIO; let i = index"
+        tuiTr>
+        <td *tuiCell="'id'" tuiTd>{{ item.id != undefined ? i + 1 : '' }}</td>
+
+        <td *tuiCell="'indexBook'" tuiTd>
+          {{ item.book != undefined && item.book.id != undefined ? item.book.id : "" }}
+        </td>
+
+        <td *tuiCell="'bookName'" tuiTd>
+          <tui-text-area class="textarea" [expandable]="true" [(ngModel)]="item.book!.name"></tui-text-area>
+        </td>
+
+        <td *tuiCell="'indexUserForm'" tuiTd>
+          {{ item.userForm != undefined && item.userForm.id != undefined ? item.userForm.id : "" }}
+        </td>
+
+        <td *tuiCell="'userFormName'" tuiTd>
+          {{
+          item.userForm!.lastName +
+          " " +
+          item.userForm!.firstName +
+          " " +
+          item.userForm!.middleName
+          }}
+        </td>
+
+        <td *tuiCell="'cost'" tuiTd>
+          <tui-input-number [(ngModel)]="item.cost" class="textarea"
+            [tuiTextfieldPostfix]="'COP' | tuiCurrency"></tui-input-number>
+        </td>
+
+        <td *tuiCell="'date'" tuiTd>
+          <tui-input-date toNativeDate class="textarea" [(ngModel)]="item.date"></tui-input-date>
+        </td>
+
+      </tr>
+    </tbody>
+  </table>
+</tui-scrollbar>

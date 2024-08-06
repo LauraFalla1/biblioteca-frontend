@@ -1,0 +1,6 @@
+<tui-badged-content [contentTop]="0" [colorTop]="userFormService.search.trim() !== '' ? 'var(--tui-error-fill)' : ''"
+	class="input"><tui-input [(ngModel)]="search"> Búsqueda por nombre completo, nombre de usuario o identificador
+	</tui-input>
+</tui-badged-content>
+
+<button tuiButton (click)="runSearch()">Buscar</button>
